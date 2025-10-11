@@ -143,9 +143,9 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.back-button,
+/* .back-button,
 .edit-button {
-  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Same gradient as Upload Work */
+  background: linear-gradient(to right, #ff7e5f, #feb47b); 
   color: white;
   border: none;
   padding: 8px 16px;
@@ -161,13 +161,13 @@
 .edit-button:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
+} 
 .back-button {
   position: absolute;
   top: 20px;
   left: 20px;
   z-index: 10;
-}
+}*/
 .top-buttons-row {
   display: flex;
   justify-content: space-between;
@@ -281,4 +281,27 @@
 .profile-actions {
   display: flex;
   gap: 12px;
+  
+}
+.logout-btn-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.logout-btn {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 6px 14px;   /* smaller size */
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #e63950;
+  transform: scale(1.05);
 }

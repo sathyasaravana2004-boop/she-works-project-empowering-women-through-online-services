@@ -15,9 +15,23 @@ function WriteReviewPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Build review object
+    const reviewer = JSON.parse(localStorage.getItem('user')) || { name: 'Anonymous' };
+    const newReview = {
+      name: reviewer.name || 'Anonymous',
+      rating: Number(review.rating),
+      comment: review.comment,
+      createdAt: new Date().toISOString(),
+    };
+
+    const key = `reviews_${providerId}`;
+    const existing = JSON.parse(localStorage.getItem(key)) || [];
+    existing.unshift(newReview); // add newest first
+    localStorage.setItem(key, JSON.stringify(existing));
+
     alert('Review submitted successfully!');
-    // TODO: send to backend with providerId
-    navigate(`/client/provider/${providerId}`);
+    // Redirect to provider public profile
+    navigate(`/provider/${providerId}`);
   };
 
   return (

@@ -47,7 +47,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* Client Routes */}
-        <Route path="/client/dashboard" element={<ClientDashboard />} />
+        <Route path="/client/ClientDashboard" element={<ClientDashboard />} />
         <Route path="/" element={<ClientDashboard />} />
         <Route path="/services/:category" element={<CategoryPage />} />
         <Route path="/services/:category/:subService" element={<ServiceList />} />
@@ -64,7 +64,8 @@ function App() {
         {/* Provider Routes */}
         <Route path="/provider/CreateProfile" element={<CreateProfile/>}/>
         <Route path="/provider/ProviderProfileView" element={<ProviderProfileView/>}/>
-        <Route path="/provider/EditProviderProfile" element={<EditProviderProfile/>}/>
+        <Route path="/edit-profile/:id" element={<EditProviderProfile />} />
+        {/* <Route path="/provider/EditProviderProfile" element={<EditProviderProfile/>}/> */}
         <Route path="/provider/ManageBookings" element={<ManageBookings />} />
         <Route path="/provider/ProviderChat/:bookingId" element={<ProviderChat />} />
        

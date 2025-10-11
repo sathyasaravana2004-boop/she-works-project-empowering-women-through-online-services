@@ -1,85 +1,550 @@
+// // src/pages/provider/CreateProfile.jsx
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import "./CreateProfile.css";
+
+// const CreateProfile = () => {
+//   const navigate = useNavigate();
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     contact: "",
+//     service: "",
+//     subservices: [],
+//     description: "",
+//     price: "",
+//     location: "",
+//     images: []
+//   });
+//   const [previewImages, setPreviewImages] = useState([]);
+//   const [servicesWithSub, setServicesWithSub] = useState({});
+
+//   useEffect(() => {
+//     axios.get("http://localhost:5000/api/services/categories")
+//       .then(res => {
+//         const data = {};
+//         res.data.forEach(c => (data[c.category] = c.subservices));
+//         setServicesWithSub(data);
+//       })
+//       .catch(err => console.error(err));
+//   }, []);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData(prev => ({ ...prev, [name]: value }));
+//   };
+
+//   const handleSubserviceChange = (e) => {
+//     const { value, checked } = e.target;
+//     setFormData(prev => {
+//       let subs = [...prev.subservices];
+//       if (checked) subs.push(value); else subs = subs.filter(s => s !== value);
+//       return { ...prev, subservices: subs };
+//     });
+//   };
+
+//   const handleImageChange = (e) => {
+//     const files = Array.from(e.target.files);
+//     setFormData(prev => ({ ...prev, images: files }));
+//     setPreviewImages(files.map(f => URL.createObjectURL(f)));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const token = localStorage.getItem("token");
+//     if (!token) { alert("Login required"); return; }
+
+//     try {
+//       const fd = new FormData();
+//       fd.append("name", formData.name);
+//       fd.append("email", formData.email);
+//       fd.append("contact", formData.contact);
+//       fd.append("service", formData.service);
+//       fd.append("description", formData.description);
+//       if (formData.price) fd.append("price", formData.price);
+//       if (formData.location) fd.append("location", formData.location);
+
+//       formData.subservices.forEach(s => fd.append("subservices", s));
+//       formData.images.forEach(file => fd.append("images", file));
+
+//       const res = await axios.post("http://localhost:5000/api/services",
+//         fd,
+//         { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
+//       );
+
+//       alert("Created successfully");
+//       navigate("/provider/ProviderProfileView");
+//     } catch (err) {
+//       console.error(err);
+//       alert(err.response?.data?.message || "Error creating");
+//     }
+//   };
+
+//   return (
+//     <div className="create-profile-container">
+//       <h2>Create Your Service Provider Profile</h2>
+//       <form className="create-profile-form" onSubmit={handleSubmit}>
+//         {/* name, email, contact */}
+//         <div className="form-group">
+//           <label>Name</label>
+//           <input name="name" type="text" value={formData.name} onChange={handleChange} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Email</label>
+//           <input name="email" type="email" value={formData.email} onChange={handleChange} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Contact</label>
+//           <input name="contact" type="text" value={formData.contact} onChange={handleChange} required/>
+//         </div>
+
+//         {/* service */}
+//         <div className="form-group">
+//           <label>Service</label>
+//           <select name="service" value={formData.service} onChange={handleChange} required>
+//             <option value="">-- Select --</option>
+//             {Object.keys(servicesWithSub).map(s => <option key={s} value={s}>{s}</option>)}
+//           </select>
+//         </div>
+
+//         {/* subservices */}
+//         {formData.service && (
+//           <div className="form-group">
+//             <label>Subservices</label>
+//             <div className="subservices-container">
+//               {servicesWithSub[formData.service]?.map(sub => (
+//                 <label key={sub} className="checkbox-label">
+//                   <input type="checkbox" value={sub} checked={formData.subservices.includes(sub)} onChange={handleSubserviceChange}/>
+//                   {sub}
+//                 </label>
+//               ))}
+//             </div>
+//           </div>
+//         )}
+
+//         {/* description, price, location */}
+//         <div className="form-group">
+//           <label>About / Description</label>
+//           <textarea name="description" value={formData.description} onChange={handleChange} rows={4} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Price</label>
+//           <input name="price" type="number" value={formData.price} onChange={handleChange} />
+//         </div>
+
+//         <div className="form-group">
+//           <label>Location</label>
+//           <input name="location" type="text" value={formData.location} onChange={handleChange}/>
+//         </div>
+
+//         {/* images */}
+//         <div className="form-group">
+//           <label>Portfolio / Profile Images</label>
+//           <input type="file" accept="image/*" multiple onChange={handleImageChange} />
+//           {previewImages.length > 0 && (
+//             <div className="image-preview-container">
+//               {previewImages.map((src, i) => <img key={i} src={src} alt={`p-${i}`} className="preview-image" />)}
+//             </div>
+//           )}
+//         </div>
+
+//         <button type="submit">🚀 Submit Profile</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default CreateProfile;
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import "./CreateProfile.css";
+
+// const CreateProfile = () => {
+//   const navigate = useNavigate();
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     contact: "",
+//     service: "",
+//     subservices: [],
+//     description: "",
+//     price: "",
+//     location: "",
+//     images: []
+//   });
+//   const [previewImages, setPreviewImages] = useState([]);
+//   const [servicesWithSub, setServicesWithSub] = useState({});
+
+//   useEffect(() => {
+//     axios.get("http://localhost:5000/api/services/categories")
+//       .then(res => {
+//         const data = {};
+//         res.data.forEach(c => (data[c.category] = c.subservices));
+//         setServicesWithSub(data);
+//       })
+//       .catch(err => console.error(err));
+//   }, []);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData(prev => ({ ...prev, [name]: value }));
+//   };
+
+//   const handleSubserviceChange = (e) => {
+//     const { value, checked } = e.target;
+//     setFormData(prev => {
+//       let subs = [...prev.subservices];
+//       if (checked) subs.push(value); else subs = subs.filter(s => s !== value);
+//       return { ...prev, subservices: subs };
+//     });
+//   };
+
+//   const handleImageChange = (e) => {
+//     const files = Array.from(e.target.files);
+//     setFormData(prev => ({ ...prev, images: files }));
+//     setPreviewImages(files.map(f => URL.createObjectURL(f)));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const token = localStorage.getItem("token");
+//     if (!token) { alert("Login required"); return; }
+
+//     try {
+//       const fd = new FormData();
+//       fd.append("name", formData.name);
+//       fd.append("email", formData.email);
+//       fd.append("contact", formData.contact);
+//       fd.append("service", formData.service);
+//       fd.append("description", formData.description);
+//       if (formData.price) fd.append("price", formData.price);
+//       if (formData.location) fd.append("location", formData.location);
+
+//       formData.subservices.forEach(s => fd.append("subservices", s));
+//       formData.images.forEach(file => fd.append("images", file));
+
+//       const res = await axios.post("http://localhost:5000/api/services",
+//         fd,
+//         { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
+//       );
+
+//       alert("Profile created successfully ✅");
+
+//       // ✅ Mark user as having profile
+//       let user = JSON.parse(localStorage.getItem("user"));
+//       if (user) {
+//         user.hasProfile = true;
+//         localStorage.setItem("user", JSON.stringify(user));
+//       }
+
+//       navigate("/provider/ProviderProfileView");
+//     } catch (err) {
+//       console.error(err);
+//       alert(err.response?.data?.message || "Error creating profile");
+//     }
+//   };
+
+//   return (
+//     <div className="create-profile-container">
+//       <h2>Create Your Service Provider Profile</h2>
+//       <form className="create-profile-form" onSubmit={handleSubmit}>
+//         {/* name, email, contact */}
+//         <div className="form-group">
+//           <label>Name</label>
+//           <input name="name" type="text" value={formData.name} onChange={handleChange} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Email</label>
+//           <input name="email" type="email" value={formData.email} onChange={handleChange} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Contact</label>
+//           <input name="contact" type="text" value={formData.contact} onChange={handleChange} required/>
+//         </div>
+
+//         {/* service */}
+//         <div className="form-group">
+//           <label>Service</label>
+//           <select name="service" value={formData.service} onChange={handleChange} required>
+//             <option value="">-- Select --</option>
+//             {Object.keys(servicesWithSub).map(s => <option key={s} value={s}>{s}</option>)}
+//           </select>
+//         </div>
+
+//         {/* subservices */}
+//         {formData.service && (
+//           <div className="form-group">
+//             <label>Subservices</label>
+//             <div className="subservices-container">
+//               {servicesWithSub[formData.service]?.map(sub => (
+//                 <label key={sub} className="checkbox-label">
+//                   <input type="checkbox" value={sub} checked={formData.subservices.includes(sub)} onChange={handleSubserviceChange}/>
+//                   {sub}
+//                 </label>
+//               ))}
+//             </div>
+//           </div>
+//         )}
+
+//         {/* description, price, location */}
+//         <div className="form-group">
+//           <label>About / Description</label>
+//           <textarea name="description" value={formData.description} onChange={handleChange} rows={4} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Price</label>
+//           <input name="price" type="number" value={formData.price} onChange={handleChange} />
+//         </div>
+
+//         <div className="form-group">
+//           <label>Location</label>
+//           <input name="location" type="text" value={formData.location} onChange={handleChange}/>
+//         </div>
+
+//         {/* images */}
+//         <div className="form-group">
+//           <label>Portfolio / Profile Images</label>
+//           <input type="file" accept="image/*" multiple onChange={handleImageChange} />
+//           {previewImages.length > 0 && (
+//             <div className="image-preview-container">
+//               {previewImages.map((src, i) => <img key={i} src={src} alt={`p-${i}`} className="preview-image" />)}
+//             </div>
+//           )}
+//         </div>
+
+//         <button type="submit">🚀 Submit Profile</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default CreateProfile;
+
+
+// // src/pages/provider/CreateProfile.jsx
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import "./CreateProfile.css";
+
+// const CreateProfile = () => {
+//   const navigate = useNavigate();
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     contact: "",
+//     service: "",
+//     subservices: [],
+//     description: "",
+//     price: "",
+//     location: "",
+//     images: []
+//   });
+//   const [previewImages, setPreviewImages] = useState([]);
+//   const [servicesWithSub, setServicesWithSub] = useState({});
+
+//   useEffect(() => {
+//     axios.get("http://localhost:5000/api/services/categories")
+//       .then(res => {
+//         const data = {};
+//         res.data.forEach(c => (data[c.category] = c.subservices));
+//         setServicesWithSub(data);
+//       })
+//       .catch(err => console.error(err));
+//   }, []);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData(prev => ({ ...prev, [name]: value }));
+//   };
+
+//   const handleSubserviceChange = (e) => {
+//     const { value, checked } = e.target;
+//     setFormData(prev => {
+//       let subs = [...prev.subservices];
+//       if (checked) subs.push(value); else subs = subs.filter(s => s !== value);
+//       return { ...prev, subservices: subs };
+//     });
+//   };
+
+//   const handleImageChange = (e) => {
+//     const files = Array.from(e.target.files);
+//     setFormData(prev => ({ ...prev, images: files }));
+//     setPreviewImages(files.map(f => URL.createObjectURL(f)));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const token = localStorage.getItem("token");
+//     if (!token) { alert("Login required"); return; }
+
+//     try {
+//       const fd = new FormData();
+//       fd.append("name", formData.name);
+//       fd.append("email", formData.email);
+//       fd.append("contact", formData.contact);
+//       fd.append("service", formData.service);
+//       fd.append("description", formData.description);
+//       if (formData.price) fd.append("price", formData.price);
+//       if (formData.location) fd.append("location", formData.location);
+
+//       formData.subservices.forEach(s => fd.append("subservices", s));
+//       formData.images.forEach(file => fd.append("images", file));
+
+//       // send to backend
+//       const res = await axios.post("http://localhost:5000/api/services",
+//         fd,
+//         { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
+//       );
+
+//       alert("Profile created successfully ✅");
+
+//       // Update localStorage user object
+//       let user = JSON.parse(localStorage.getItem("user"));
+//       if (user) {
+//         user.hasProfile = true;
+//         if (res.data.images && res.data.images.length > 0) {
+//           user.profileImage = res.data.images[0]; // first image as profile
+//         }
+//         localStorage.setItem("user", JSON.stringify(user));
+//       }
+
+//       navigate("/provider/ProviderProfileView");
+//     } catch (err) {
+//       console.error(err);
+//       alert(err.response?.data?.message || "Error creating profile");
+//     }
+//   };
+
+//   return (
+//     <div className="create-profile-container">
+//       <h2>Create Your Service Provider Profile</h2>
+//       <form className="create-profile-form" onSubmit={handleSubmit}>
+//         {/* name, email, contact */}
+//         <div className="form-group">
+//           <label>Name</label>
+//           <input name="name" type="text" value={formData.name} onChange={handleChange} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Email</label>
+//           <input name="email" type="email" value={formData.email} onChange={handleChange} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Contact</label>
+//           <input name="contact" type="text" value={formData.contact} onChange={handleChange} required/>
+//         </div>
+
+//         {/* service */}
+//         <div className="form-group">
+//           <label>Service</label>
+//           <select name="service" value={formData.service} onChange={handleChange} required>
+//             <option value="">-- Select --</option>
+//             {Object.keys(servicesWithSub).map(s => <option key={s} value={s}>{s}</option>)}
+//           </select>
+//         </div>
+
+//         {/* subservices */}
+//         {formData.service && (
+//           <div className="form-group">
+//             <label>Subservices</label>
+//             <div className="subservices-container">
+//               {servicesWithSub[formData.service]?.map(sub => (
+//                 <label key={sub} className="checkbox-label">
+//                   <input
+//                     type="checkbox"
+//                     value={sub}
+//                     checked={formData.subservices.includes(sub)}
+//                     onChange={handleSubserviceChange}
+//                   />
+//                   {sub}
+//                 </label>
+//               ))}
+//             </div>
+//           </div>
+//         )}
+
+//         {/* description, price, location */}
+//         <div className="form-group">
+//           <label>About / Description</label>
+//           <textarea name="description" value={formData.description} onChange={handleChange} rows={4} required/>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Price</label>
+//           <input name="price" type="number" value={formData.price} onChange={handleChange} />
+//         </div>
+
+//         <div className="form-group">
+//           <label>Location</label>
+//           <input name="location" type="text" value={formData.location} onChange={handleChange}/>
+//         </div>
+
+//         {/* images */}
+//         <div className="form-group">
+//           <label>Portfolio / Profile Images</label>
+//           <input type="file" accept="image/*" multiple onChange={handleImageChange} />
+//           {previewImages.length > 0 && (
+//             <div className="image-preview-container">
+//               {previewImages.map((src, i) => <img key={i} src={src} alt={`p-${i}`} className="preview-image" />)}
+//             </div>
+//           )}
+//         </div>
+
+//         <button type="submit">🚀 Submit Profile</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default CreateProfile;
+
+
 // src/pages/provider/CreateProfile.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./CreateProfile.css";
 
-function CreateProfile() {
+const CreateProfile = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
+    contact: "",
     service: "",
     subservices: [],
-    bio: "",
-    contact: "",
-    email: "",
-    images: [],
+    description: "",
+    price: "",
+    location: "",
+    images: []
   });
-
   const [previewImages, setPreviewImages] = useState([]);
-  const [errors, setErrors] = useState({});
+  const [servicesWithSub, setServicesWithSub] = useState({});
 
-  // Services with subservices
-  const servicesWithSub = {
-    Embroidery: [
-      "Hand Embroidery",
-      "Machine Embroidery",
-      "Pearl Embriodery",
-      "Beads Embroidery",
-      "Free Style Embroidery",
-    ],
-    "Home-Cooked Food": [
-      "South Indian Meals",
-      "North Indian Meals",
-      "Snacks",
-      "Sweets",
-    ],
-    "Custom Gifts": ["Handmade Gifts", "Birthday Gifts","Wedding Gifts", "Anniversary Gifts"],
-    "Arts & Crafts": [ "Paintings","Paper Crafting","Clay modelling","Collage Making", "Handmade Decor"],
-    "Fashion & Tailoring": [
-      "Ladies Wear",
-      "Mens wear",
-      "Kids wear",
-      "Ethnic Wear",
-    ],
-    "Beauty & Wellness": [
-      "Bridal Makeup",
-      "Skincare","Hair care",
-      "Manicure & Pedicure",
-      "Full Body Massage",
-      "Mehendi",
-    ],
-    "Tutoring & Education": [
-      "Math Coaching",
-      "Language Classes",
-      "Handwriting",
-      "Music Lessons",
-    ],
-    "Event Decoration": [
-      "Birthday Decor",
-      "Wedding Decor",
-      "Festive Decor",
-      "Anniversary Decor",
-      "Corporate Event Decor",
-    ],
-    "Home Gardening Kits": [
-      "Indoor Plants",
-      "Plant Kit",
-      "Herb Kit",
-      "Vegetable Kit",
-      "Flower Kit",
-      "Microgreen Kit",
-    ],
-    "Traditional Festival Kits": [
-      "Pooja Kits",
-      "Festival Essentials",
-      "Holi Festival Kit",
-      "Diwali Festival Kit",
-      "ganapathi Festival Kit",
-      "Festive Delight Craft",
-      "Lotus Puja decor kit",
-    ],
-   
-  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/services/categories")
+      .then((res) => {
+        const data = {};
+        res.data.forEach((c) => (data[c.category] = c.subservices));
+        setServicesWithSub(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,177 +554,214 @@ function CreateProfile() {
   const handleSubserviceChange = (e) => {
     const { value, checked } = e.target;
     setFormData((prev) => {
-      let updatedSubs = [...prev.subservices];
-      if (checked) {
-        updatedSubs.push(value);
-      } else {
-        updatedSubs = updatedSubs.filter((s) => s !== value);
-      }
-      return { ...prev, subservices: updatedSubs };
+      let subs = [...prev.subservices];
+      if (checked) subs.push(value);
+      else subs = subs.filter((s) => s !== value);
+      return { ...prev, subservices: subs };
     });
   };
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setFormData((prev) => ({ ...prev, images: files }));
-
-    const previews = files.map((file) => URL.createObjectURL(file));
-    setPreviewImages(previews);
+    setPreviewImages(files.map((f) => URL.createObjectURL(f)));
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.name.trim()) newErrors.name = "Name is required.";
-    if (!formData.service) newErrors.service = "Please select a service.";
-    if (formData.service && formData.subservices.length === 0) {
-      newErrors.subservices = "Select at least one subservice.";
-    }
-    if (!formData.bio.trim()) newErrors.bio = "Bio is required.";
-    if (!formData.contact.trim()) {
-      newErrors.contact = "Contact number is required.";
-    } else if (!/^[0-9]{10}$/.test(formData.contact)) {
-      newErrors.contact = "Enter a valid 10-digit phone number.";
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required.";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
-    ) {
-      newErrors.email = "Enter a valid email address.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Login required");
+      return;
+    }
 
-    // Ideally send formData to backend here
-    console.log("Submitted Provider Profile:", formData);
+    // ✅ Manual validation for all required fields
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.contact ||
+      !formData.service ||
+      formData.subservices.length === 0 ||
+      !formData.description ||
+      !formData.price ||
+      !formData.location ||
+      formData.images.length === 0
+    ) {
+      alert("⚠️ Please fill all required fields before submitting.");
+      return;
+    }
 
-    // Navigate to provider profile view
-    navigate("/provider/ProviderProfileView");
+    try {
+      const fd = new FormData();
+      fd.append("name", formData.name);
+      fd.append("email", formData.email);
+      fd.append("contact", formData.contact);
+      fd.append("service", formData.service);
+      fd.append("description", formData.description);
+      fd.append("price", formData.price);
+      fd.append("location", formData.location);
+
+      formData.subservices.forEach((s) => fd.append("subservices", s));
+      formData.images.forEach((file) => fd.append("images", file));
+
+      const res = await axios.post("http://localhost:5000/api/services", fd, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      alert("Profile created successfully ✅");
+
+      // ✅ Update localStorage user
+      let user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        user.hasProfile = true;
+        if (res.data.images && res.data.images.length > 0) {
+          user.profileImage = res.data.images[0]; // first image as profile
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+
+      navigate("/provider/ProviderProfileView");
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Error creating profile");
+    }
   };
 
   return (
     <div className="create-profile-container">
       <h2>Create Your Service Provider Profile</h2>
-      <form className="create-profile-form" onSubmit={handleSubmit}>
-        {/* Name */}
+      <form
+        className="create-profile-form"
+        onSubmit={handleSubmit}
+        onKeyDown={(e) => e.key === "Enter" && e.preventDefault()} // ✅ Block Enter-submit
+      >
+        {/* name, email, contact */}
         <div className="form-group">
           <label>Name</label>
           <input
             name="name"
             type="text"
-            placeholder="Your full name"
             value={formData.name}
             onChange={handleChange}
+            required
           />
-          {errors.name && <span className="error">{errors.name}</span>}
         </div>
 
-        {/* Main Service */}
         <div className="form-group">
-          <label>Service Offered</label>
+          <label>Email</label>
+          <input
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Contact</label>
+          <input
+            name="contact"
+            type="text"
+            value={formData.contact}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* service */}
+        <div className="form-group">
+          <label>Service</label>
           <select
             name="service"
             value={formData.service}
             onChange={handleChange}
+            required
           >
-            <option value="">-- Select a Service --</option>
-            {Object.keys(servicesWithSub).map((service) => (
-              <option key={service} value={service}>
-                {service}
+            <option value="">-- Select --</option>
+            {Object.keys(servicesWithSub).map((s) => (
+              <option key={s} value={s}>
+                {s}
               </option>
             ))}
           </select>
-          {errors.service && <span className="error">{errors.service}</span>}
         </div>
 
-        {/* Subservices */}
+        {/* subservices */}
         {formData.service && (
           <div className="form-group">
             <label>Subservices</label>
             <div className="subservices-container">
-              {servicesWithSub[formData.service].map((sub) => (
+              {servicesWithSub[formData.service]?.map((sub) => (
                 <label key={sub} className="checkbox-label">
                   <input
                     type="checkbox"
                     value={sub}
                     checked={formData.subservices.includes(sub)}
                     onChange={handleSubserviceChange}
+                    required={formData.subservices.length === 0} // force at least 1
                   />
                   {sub}
                 </label>
               ))}
             </div>
-            {errors.subservices && (
-              <span className="error">{errors.subservices}</span>
-            )}
           </div>
         )}
 
-       
-
-        {/* Contact */}
+        {/* description, price, location */}
         <div className="form-group">
-          <label>Contact Number</label>
-          <input
-            name="contact"
-            type="text"
-            placeholder="Enter 10-digit phone number"
-            value={formData.contact}
-            onChange={handleChange}
-          />
-          {errors.contact && <span className="error">{errors.contact}</span>}
-        </div>
-
-        {/* Email */}
-        <div className="form-group">
-          <label>Email Address</label>
-          <input
-            name="email"
-            type="email"
-            placeholder="example@email.com"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-
-         {/* Bio */}
-        <div className="form-group">
-          <label>Bio / Description</label>
+          <label>About / Description</label>
           <textarea
-            name="bio"
-            placeholder="Tell us about your skills, experience, and passion..."
-            value={formData.bio}
+            name="description"
+            value={formData.description}
             onChange={handleChange}
             rows={4}
+            required
           />
-          {errors.bio && <span className="error">{errors.bio}</span>}
         </div>
 
-        {/* Profile Pic */}
         <div className="form-group">
-          <label>Profile Pic (Images)</label>
+          <label>Price</label>
           <input
-            name="images"
+            name="price"
+            type="number"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Location</label>
+          <input
+            name="location"
+            type="text"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* images */}
+        <div className="form-group">
+          <label>Portfolio / Profile Images</label>
+          <input
             type="file"
             accept="image/*"
             multiple
             onChange={handleImageChange}
+            required
           />
           {previewImages.length > 0 && (
             <div className="image-preview-container">
-              {previewImages.map((src, index) => (
+              {previewImages.map((src, i) => (
                 <img
-                  key={index}
+                  key={i}
                   src={src}
-                  alt={`preview-${index}`}
+                  alt={`p-${i}`}
                   className="preview-image"
                 />
               ))}
@@ -271,6 +773,6 @@ function CreateProfile() {
       </form>
     </div>
   );
-}
+};
 
 export default CreateProfile;
