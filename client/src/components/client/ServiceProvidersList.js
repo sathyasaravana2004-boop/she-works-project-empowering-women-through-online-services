@@ -10,7 +10,7 @@ const providers = [
   {
     id: 1,
     name: "Anitha Embroidery",
-    category: "embroidery",
+    category: "Embroidery",
     rating: 4.8,
     reviews: 12,
     image: "/assets/Providers/embroidery1.jpeg",
@@ -18,7 +18,7 @@ const providers = [
   {
     id: 2,
     name: "Homely Meals by Priya",
-    category: "home-cooked-food",
+    category: "Home Cooked Food",
     rating: 4.6,
     reviews: 20,
     image: "/assets/Providers/food1.jpeg",
@@ -26,7 +26,7 @@ const providers = [
   {
     id: 3,
     name: "Crafty Hands",
-    category: "Arts&Crafts",
+    category: "Arts & Crafts",
     rating: 4.7,
     reviews: 9,
     image: "/assets/Providers/crafts1.jpeg",
