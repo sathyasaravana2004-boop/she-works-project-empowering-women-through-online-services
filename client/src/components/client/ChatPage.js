@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './ChatPage.css';
-import ClientProfileIcon from './ClientProfileIcon';
 
 const ChatPage = () => {
   const { providerId } = useParams();
@@ -39,9 +38,7 @@ const ChatPage = () => {
 
   return (
     <div className="chat-page-wrapper">
-      <div>
-      <ClientProfileIcon />
-      </div>
+      
       <div className="chat-page">
         <div className="chat-header">Chat with Provider #{providerId}</div>
 

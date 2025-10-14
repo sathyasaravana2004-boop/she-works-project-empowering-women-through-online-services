@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './WriteReviewPage.css';
-import ClientProfileIcon from './ClientProfileIcon';
 
 function WriteReviewPage() {
   const { providerId } = useParams();
@@ -36,10 +35,6 @@ function WriteReviewPage() {
 
   return (
     <div className="write-review-container">
-      <div>
-            <ClientProfileIcon />
-            
-            </div>
       <div className="review-card">
         <h2>Write a Review for <span className="highlight">Provider {providerId}</span></h2>
         <form onSubmit={handleSubmit}>

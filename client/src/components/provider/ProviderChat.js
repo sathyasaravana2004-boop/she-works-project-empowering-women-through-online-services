@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./ProviderChat.css";
-import ProviderProfileIcon from "./ProviderProfileIcon";
 
 export default function ProviderChat() {
   const { bookingId } = useParams();
@@ -33,7 +32,6 @@ export default function ProviderChat() {
 
   return (
     <div className="chat-page-wrapper">
-      <ProviderProfileIcon />
       <div className="chat-card">
         {/* Chat header (without back button) */}
         <header className="chat-header">

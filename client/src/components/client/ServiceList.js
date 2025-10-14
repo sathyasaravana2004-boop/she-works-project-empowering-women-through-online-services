@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './ServiceList.css';
-import ClientProfileIcon from './ClientProfileIcon';
 
 const BASE_URL = 'http://localhost:5000';
 
@@ -158,9 +157,6 @@ function ServiceList() {
       <h2>
         Providers for "{subService}" in {category}
       </h2>
-      <div>
-        <ClientProfileIcon />
-      </div>
       <div className="grid">
         {providers.length > 0 ? (
           providers.map((provider) => (

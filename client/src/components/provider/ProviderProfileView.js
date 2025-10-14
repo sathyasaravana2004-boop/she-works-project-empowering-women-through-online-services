@@ -12,7 +12,6 @@ const ProviderProfileView = () => {
   const [loading, setLoading] = useState(true);
   const [userProfileImage, setUserProfileImage] = useState("");
 
-  // Helper to fix image URL
   const getFullImageURL = (path) => {
     if (!path) return "";
     return path.startsWith("http") ? path : `${BASE_URL}${path.startsWith("/") ? "" : "/"}${path}`;
@@ -33,7 +32,9 @@ const ProviderProfileView = () => {
 
         // Fetch fresh user data for profile image
         const userRes = await axios.get(`${BASE_URL}/api/auth/user/${user.id}`);
-        let profileImg = userRes.data?.profileImage || res.data?.[0]?.images?.[0] || "";
+        const profileImg =
+          userRes.data?.profileImage ||
+          (res.data?.[0]?.images?.[0] ? `${BASE_URL}${res.data[0].images[0]}` : "");
         setUserProfileImage(profileImg);
       } catch (err) {
         console.error("Fetch profile error:", err);
@@ -69,7 +70,7 @@ const ProviderProfileView = () => {
       <div className="profile-header">
         <div className="profile-header-left">
           <img
-            src={userProfileImage ? `http://localhost:5000${userProfileImage}` : "/assets/default-profile.png"} 
+            src={userProfileImage || "/assets/default-profile.png"}
             alt={profile.providerName}
             className="profile-pic-circle"
           />
@@ -138,11 +139,12 @@ const ProviderProfileView = () => {
                     },
                   });
 
-                  // Refresh services
                   const r = await axios.get(`${BASE_URL}/api/services/provider/${JSON.parse(localStorage.getItem("user")).id}`);
                   setServices(r.data);
 
-                  if (r.data?.[0]?.images?.[0]) setUserProfileImage(r.data[0].images[0]);
+                  if (r.data?.[0]?.images?.[0]) {
+                    setUserProfileImage(getFullImageURL(r.data[0].images[0]));
+                  }
                 } catch (err) {
                   console.error("Upload error:", err);
                   alert("Upload failed");

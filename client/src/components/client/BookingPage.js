@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./BookingPage.css";
-import ClientProfileIcon from "./ClientProfileIcon";
+
 
 function BookingPage() {
   const { providerId } = useParams();
@@ -92,7 +92,7 @@ function BookingPage() {
 
   return (
     <div className="booking-page">
-      <ClientProfileIcon />
+  
       <div className="booking-card">
         <h2>📅 Book a Service with Provider: {providerId}</h2>
 

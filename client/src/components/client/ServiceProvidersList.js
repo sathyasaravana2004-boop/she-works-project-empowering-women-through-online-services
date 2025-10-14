@@ -3,7 +3,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./ServiceProvidersList.css";
-import ClientProfileIcon from "./ClientProfileIcon";
 
 // Mock providers data
 const providers = [
@@ -44,10 +43,6 @@ const ServiceProvidersList = () => {
 
   return (
     <div className="providers-page">
-      <div>
-      <ClientProfileIcon />
-      
-      </div>
       <h1>Service Providers - {category.replace(/([A-Z])/g, " $1")}</h1>
       
       <div className="providers-grid">

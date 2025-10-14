@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './ClientDashboard.css';
-import ClientProfileIcon from "./ClientProfileIcon";
 
 const services = [
   {
@@ -83,10 +82,6 @@ const ClientDashboard = () => {
   return (
       
     <div className="client-dashboard">
-      <div>
-      <ClientProfileIcon />
-      
-      </div>
       <h1> Services</h1>
       <div className="service-grid">
         {services.map((service) => (

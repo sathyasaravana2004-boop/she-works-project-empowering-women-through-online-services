@@ -1,0 +1,62 @@
+.client-setup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f9fafb;
+  padding: 20px;
+}
+
+.client-setup-card {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.client-setup-card h2 {
+  margin-bottom: 25px;
+  color: #333;
+  font-weight: 600;
+}
+
+.client-setup-card label {
+  display: block;
+  text-align: left;
+  margin: 10px 0 6px;
+  color: #555;
+  font-weight: 500;
+}
+
+.client-setup-card input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.client-setup-card input:focus {
+  border-color: #ff6f61;
+}
+
+.client-setup-card button {
+  margin-top: 20px;
+  background: #ff6f61;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.client-setup-card button:hover {
+  background: #ff4f3d;
+}

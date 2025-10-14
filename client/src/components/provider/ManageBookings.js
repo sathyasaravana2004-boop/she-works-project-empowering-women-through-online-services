@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ManageBookings.css";
-import ProviderProfileIcon from "./ProviderProfileIcon";
 
 export default function ManageBookings() {
   const [bookings, setBookings] = useState([]);
@@ -47,7 +46,6 @@ export default function ManageBookings() {
 
   return (
     <div className="manage-bookings">
-      <ProviderProfileIcon  />
       <h2>Manage Bookings</h2>
       {bookings.length === 0 ? (
         <p>No bookings yet.</p>

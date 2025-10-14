@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CreateProfile.css";
 
+const BASE_URL = "http://localhost:5000";
+
 const CreateProfile = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -22,7 +24,7 @@ const CreateProfile = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/services/categories")
+      .get(`${BASE_URL}/api/services/categories`)
       .then((res) => {
         const data = {};
         res.data.forEach((c) => (data[c.category] = c.subservices));
@@ -60,7 +62,6 @@ const CreateProfile = () => {
       return;
     }
 
-    // ✅ Manual validation for all required fields
     if (
       !formData.name ||
       !formData.email ||
@@ -89,7 +90,7 @@ const CreateProfile = () => {
       formData.subservices.forEach((s) => fd.append("subservices", s));
       formData.images.forEach((file) => fd.append("images", file));
 
-      const res = await axios.post("http://localhost:5000/api/services", fd, {
+      const res = await axios.post(`${BASE_URL}/api/services`, fd, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -98,12 +99,12 @@ const CreateProfile = () => {
 
       alert("Profile created successfully ✅");
 
-      // ✅ Update localStorage user
+      // Update localStorage user with full URL profileImage
       let user = JSON.parse(localStorage.getItem("user"));
       if (user) {
         user.hasProfile = true;
         if (res.data.images && res.data.images.length > 0) {
-          user.profileImage = res.data.images[0]; // first image as profile
+          user.profileImage = `${BASE_URL}${res.data.images[0].startsWith("/") ? "" : "/"}${res.data.images[0]}`;
         }
         localStorage.setItem("user", JSON.stringify(user));
       }
@@ -121,7 +122,7 @@ const CreateProfile = () => {
       <form
         className="create-profile-form"
         onSubmit={handleSubmit}
-        onKeyDown={(e) => e.key === "Enter" && e.preventDefault()} // ✅ Block Enter-submit
+        onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
       >
         {/* name, email, contact */}
         <div className="form-group">
@@ -178,7 +179,7 @@ const CreateProfile = () => {
         {/* subservices */}
         {formData.service && (
           <div className="form-group">
-            <label>subservices</label>
+            <label>Subservices</label>
             <div className="subservices-container">
               {servicesWithSub[formData.service]?.map((sub) => (
                 <label key={sub} className="checkbox-label">
@@ -187,7 +188,7 @@ const CreateProfile = () => {
                     value={sub}
                     checked={formData.subservices.includes(sub)}
                     onChange={handleSubserviceChange}
-                    required={formData.subservices.length === 0} // force at least 1
+                    required={formData.subservices.length === 0}
                   />
                   {sub}
                 </label>

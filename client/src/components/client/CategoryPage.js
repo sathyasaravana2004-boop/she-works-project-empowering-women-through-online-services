@@ -2,7 +2,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import "./CategoryPage.css";
-import ClientProfileIcon from "./ClientProfileIcon";
+
 const categoryData = {
   Embroidery: {
     name: "Embroidery",
@@ -114,9 +114,7 @@ function CategoryPage() {
 
   return (
     <div className="category-page">
-      <div>
-      <ClientProfileIcon />
-      </div>
+    
       <h2>{categoryInfo.name} - Sub Services</h2>
       <div className="grid">
         {categoryInfo.subServices.length > 0 ? (

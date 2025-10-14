@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ProviderProfileC.css';
 import { motion } from 'framer-motion';
-import ClientProfileIcon from './ClientProfileIcon';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000';
@@ -48,7 +47,6 @@ const ProviderProfileC = () => {
   if (!serviceProfile || serviceProfile.length === 0) {
     return (
       <div>
-        <ClientProfileIcon />
         <p>No profile found for this provider.</p>
       </div>
     );
@@ -67,9 +65,7 @@ const ProviderProfileC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div>
-        <ClientProfileIcon />
-      </div>
+     
       <div className="profile-card">
         <img src={image} alt={serviceProfile.providerName || 'Provider'} className="provider-image" />
         <div className="provider-info">
