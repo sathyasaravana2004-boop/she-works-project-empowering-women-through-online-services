@@ -1,8 +1,6 @@
-// src/components/client/BookingPage.js
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./BookingPage.css";
-
 
 function BookingPage() {
   const { providerId } = useParams();
@@ -13,6 +11,7 @@ function BookingPage() {
     contact: "",
     date: "",
     message: "",
+    paymentMethod: "", // ✅ Added payment method
   });
 
   const [errors, setErrors] = useState({});
@@ -39,30 +38,26 @@ function BookingPage() {
       const newErrors = {};
       const today = new Date().setHours(0, 0, 0, 0); // reset time
 
-      if (!formData.name.trim()) {
-        newErrors.name = "Name is required";
-      }
+      if (!formData.name.trim()) newErrors.name = "Name is required";
 
-      if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+      if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email))
         newErrors.email = "Enter a valid email address";
-      }
 
-      if (!formData.contact || !/^\d{10}$/.test(formData.contact)) {
+      if (!formData.contact || !/^\d{10}$/.test(formData.contact))
         newErrors.contact = "Enter a valid 10-digit contact number";
-      }
 
       if (!formData.date) {
         newErrors.date = "Select a date";
       } else {
         const selectedDate = new Date(formData.date).setHours(0, 0, 0, 0);
-        if (selectedDate < today) {
-          newErrors.date = "Date cannot be in the past";
-        }
+        if (selectedDate < today) newErrors.date = "Date cannot be in the past";
       }
 
-      if (!formData.message.trim()) {
+      if (!formData.message.trim())
         newErrors.message = "Message cannot be empty";
-      }
+
+      if (!formData.paymentMethod)
+        newErrors.paymentMethod = "Please select a payment method";
 
       return newErrors;
     };
@@ -80,19 +75,20 @@ function BookingPage() {
       contact: true,
       date: true,
       message: true,
-    }); // force show all errors if submit clicked
+      paymentMethod: true,
+    });
 
     if (!isFormValid) {
       alert("Please fix errors before submitting.");
       return;
     }
+
     alert("Booking Submitted Successfully!");
     // Send formData to backend here
   };
 
   return (
     <div className="booking-page">
-  
       <div className="booking-card">
         <h2>📅 Book a Service with Provider: {providerId}</h2>
 
@@ -109,9 +105,7 @@ function BookingPage() {
               required
             />
             <label>Name</label>
-            {touched.name && errors.name && (
-              <p className="error">{errors.name}</p>
-            )}
+            {touched.name && errors.name && <p className="error">{errors.name}</p>}
           </div>
 
           {/* Email */}
@@ -158,7 +152,7 @@ function BookingPage() {
               onChange={handleChange}
               onBlur={handleBlur}
               required
-              min={new Date().toISOString().split("T")[0]} // restrict past dates in picker
+              min={new Date().toISOString().split("T")[0]}
             />
             <label>Preferred Date</label>
             {touched.date && errors.date && (
@@ -182,6 +176,25 @@ function BookingPage() {
             )}
           </div>
 
+          {/* ✅ Payment Method */}
+          <div className="floating-label full-width">
+            <select
+              name="paymentMethod"
+              value={formData.paymentMethod}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              required
+            >
+              <option value="">Select Payment Method</option>
+              <option value="online">Online Payment</option>
+              <option value="cod">Cash on Delivery</option>
+            </select>
+            <label>Payment Method</label>
+            {touched.paymentMethod && errors.paymentMethod && (
+              <p className="error">{errors.paymentMethod}</p>
+            )}
+          </div>
+
           <div className="booking-buttons full-width">
             <button type="submit" disabled={!isFormValid}>
               📅 Confirm Booking
@@ -189,18 +202,20 @@ function BookingPage() {
           </div>
         </form>
 
-        {/* Payment Info */}
-        <div className="payment-info">
-          <h3>💰 Payment Info</h3>
-          <p>
-            UPI ID: <strong>anita@upi</strong>
-            <br />
-            Bank: XYZ Bank
-            <br />
-            Account Holder: Anita Sharma
-          </p>
-          <img src="/images/payment_qr.png" alt="UPI QR Code" />
-        </div>
+        {/* ✅ Conditional Payment Info */}
+        {formData.paymentMethod === "online" && (
+          <div className="payment-info">
+            <h3>💰 Payment Info</h3>
+            <p>
+              UPI ID: <strong>anita@upi</strong>
+              <br />
+              Bank: XYZ Bank
+              <br />
+              Account Holder: Anita Sharma
+            </p>
+            <img src="/images/payment_qr.png" alt="UPI QR Code" />
+          </div>
+        )}
       </div>
     </div>
   );
