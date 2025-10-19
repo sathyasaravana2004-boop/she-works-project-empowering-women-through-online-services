@@ -17,8 +17,9 @@ import ServiceList from './components/client/ServiceList';
 import ProviderProfileC from './components/client/ProviderProfileC';
 import BookingPage from './components/client/BookingPage';
 import ChatPage from './components/client/ChatPage';
-import PaymentPage from './components/client/PaymentPage';
 import WriteReviewPage from './components/client/WriteReviewPage';
+import ChatListPage from './components/client/ChatListPage';
+import ClientOrdersPage from './components/client/ClientOrdersPage';
 
 
 
@@ -29,6 +30,8 @@ import EditProviderProfile from './components/provider/EditProviderProfile';
 import ManageBookings from './components/provider/ManageBookings';
 import ProviderReviews from './components/provider/ProviderReviews';
 import ProviderChat from './components/provider/ProviderChat';
+import ProviderChatListPage from './components/provider/ProviderChatListPage';
+import ProviderOrdersPage from './components/provider/ProviderOrdersPage';
 
 
 // Shared
@@ -56,16 +59,15 @@ function App() {
         <Route path="/provider/:providerId" element={<ProviderProfileC />} />
         <Route path="/client/book/:providerId" element={<BookingPage />} />
         <Route path="/client/chat/:providerId" element={<ChatPage />} />
-        <Route path="/client/payment/:providerId" element={<PaymentPage />} />
         <Route path="/client/writereview/:providerId" element={<WriteReviewPage/>}/>
         <Route path="/client/profile" element={<ClientProfilePage />} />
         <Route path="/client/edit-profile" element={<ClientProfileEditPage />} />
 
         <Route path="/client/ClientProfilePage" element={<ClientProfilePage />} />
-        {/* <Route path="/client/orders" element={<ClientOrders />} />
-        <Route path="/client/chats" element={<ClientChats />} />
-
-         */}
+        <Route path="/client/ClientOrdersPage" element={<ClientOrdersPage />} />
+        <Route path="/client/ChatListPage" element={<ChatListPage />} />
+        <Route path="/chats/:chatId" element={<ChatPage />} />
+         
 
 
         {/* Provider Routes */}
@@ -75,12 +77,10 @@ function App() {
         <Route path="/provider/ManageBookings" element={<ManageBookings />} />
         <Route path="/provider/ProviderChat/:bookingId" element={<ProviderChat />} />
 
-
-        {/* <Route path="/provider/dashboard" element={<ProviderDashboard />} />
-        <Route path="/provider/profile" element={<ProviderProfileView />} /> */}
         <Route path="/provider/ManageBookings" element={<ManageBookings />} />
         <Route path="/provider/ProviderReviews" element={<ProviderReviews />} />
-        {/*<Route path="/provider/chats" element={<ProviderChats />} /> */}
+        <Route path="/provider/ProviderChatListPage" element={<ProviderChatListPage />} />
+        <Route path="/provider/ProviderOrdersPage" element={<ProviderOrdersPage />} />
        
         {/* Catch-All */}
         <Route path="*" element={<NotFound />} />

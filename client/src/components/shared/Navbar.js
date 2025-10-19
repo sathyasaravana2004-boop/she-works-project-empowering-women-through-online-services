@@ -30,17 +30,18 @@ const Navbar = () => {
           <>
             <NavLink to="/client/ClientDashboard" className="nav-item">Dashboard</NavLink>
             <NavLink to="/client/profile" className="nav-item">Profile</NavLink>
-            <NavLink to="/client/orders" className="nav-item">Orders</NavLink>
-            <NavLink to="/client/chats" className="nav-item">Chats</NavLink>
+            <NavLink to="/client/ClientOrdersPage" className="nav-item">Orders</NavLink>
+            <NavLink to="/client/ChatListPage" className="nav-item">Chats</NavLink>
           </>
         )}
 
         {user.role === "provider" && (
           <>
             <NavLink to="/provider/ProviderProfileView" className="nav-item">Profile</NavLink>
-            <NavLink to="/provider/ManageBookings" className="nav-item">Bookings</NavLink>
+            <NavLink to="/provider/ManageBookings" className="nav-item">Manage Bookings</NavLink>
+            <NavLink to="/provider/ProviderOrdersPage" className="nav-item">Orders</NavLink>
+            <NavLink to="/provider/providerChatListPage" className="nav-item">Chats</NavLink>
             <NavLink to="/provider/ProviderReviews" className="nav-item">Reviews</NavLink>
-            <NavLink to="/provider/chats" className="nav-item">Chats</NavLink>
           </>
         )}
       </div>

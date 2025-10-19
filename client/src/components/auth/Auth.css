@@ -9,19 +9,6 @@ body {
   overflow-x: hidden;
 }
 
-/* .auth-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;       
-  background: radial-gradient(circle at center, rgba(255,255,255,0.3), rgba(0,0,0,0.1));
-   background-image: url(../../../public/assets/background-image.jpg);
-  position: relative;
-} */
 .auth-container {
   display: flex;
   align-items: center;
@@ -116,4 +103,21 @@ body {
 .auth-card * {
   position: relative;
   z-index: 2;
+}
+.login-btn{
+   background: #ff758c;
+  background: linear-gradient(135deg, #f475ff, #d4407e);
+  color: white;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }

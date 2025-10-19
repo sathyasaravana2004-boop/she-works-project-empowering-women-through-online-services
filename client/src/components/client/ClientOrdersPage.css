@@ -1,0 +1,165 @@
+.client-orders-page {
+  padding: 2rem;
+  background: #fffafc;
+  min-height: 100vh;
+}
+
+.client-orders-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #db2777;
+  margin-bottom: 2rem;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 750px;
+  margin: auto;
+}
+
+.order-wrapper {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(219, 39, 119, 0.08);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.order-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.order-card:hover {
+  background: #fff0f6;
+}
+
+.order-info h3 {
+  color: #111;
+  margin-bottom: 0.3rem;
+}
+
+.order-info p {
+  color: #555;
+  margin: 0;
+}
+
+.dates {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.status-tag {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.status-tag.pending {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+
+.status-tag.accepted {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-tag.processing {
+  background: #f0f9ff;
+  color: #0284c7;
+}
+
+.status-tag.completed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-tag.rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* === Tracking Bar Section === */
+.tracking-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 1.5rem 2rem;
+  background: #fff8fc;
+  border-top: 1px solid #f5c6dc;
+}
+
+.tracking-step {
+  text-align: center;
+  position: relative;
+  flex: 1;
+}
+
+.circle {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #ccc;
+  border-radius: 50%;
+  background: white;
+  margin: 0 auto;
+  z-index: 2;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.circle.active {
+  border-color: #db2777;
+  background: #db2777;
+  transform: scale(1.1);
+}
+
+.label {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.label.active {
+  color: #db2777;
+  font-weight: 600;
+}
+
+.line {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 100%;
+  height: 3px;
+  background: #ddd;
+  z-index: 1;
+}
+
+.line.active {
+  background: #db2777;
+}
+@media (max-width: 600px) {
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tracking-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .line {
+    display: none;
+  }
+}

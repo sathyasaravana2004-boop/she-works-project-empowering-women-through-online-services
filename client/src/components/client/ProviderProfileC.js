@@ -1,3 +1,4 @@
+//displays the particular service provider profile
 // src/pages/client/ProviderProfileC.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
