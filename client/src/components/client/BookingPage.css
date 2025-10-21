@@ -61,13 +61,15 @@
 
 .floating-label input:focus,
 .floating-label select:focus,
-.floating-label textarea:focus {
+.floating-label textarea:focus,
+.floating-label .full-width {
   border-color: #00a2a2;
   box-shadow: 0 0 10px rgba(0, 162, 162, 0.3);
   transform: scale(1.01);
 }
 
-.floating-label label {
+.floating-label label,
+.floating-label .full-width {
   position: absolute;
   top: 50%;
   left: 14px;
@@ -85,7 +87,8 @@
 .floating-label select:focus + label,
 .floating-label select:not([value=""]) + label,
 .floating-label textarea:focus + label,
-.floating-label textarea:not(:placeholder-shown) + label {
+.floating-label textarea:not(:placeholder-shown) + label ,
+.floating-label .full-width{
   top: -10px;
   left: 12px;
   font-size: 13px;
@@ -97,8 +100,8 @@
   min-height: 100px;
 }
 
-.full-width {
-  width: 90%;
+.floating-label full-width {
+  width: 100%;
 }
 
 .booking-buttons {

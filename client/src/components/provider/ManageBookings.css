@@ -7,7 +7,7 @@
 .manage-bookings h2 {
   font-size: 1.5rem;
   margin-bottom: 20px;
-}
+}   
 
 .booking-card {
   background: #fff;
@@ -19,6 +19,10 @@
 
 .booking-info h3 {
   margin: 0 0 8px;
+}
+.booking-info p{
+  margin: 4px 6px;
+  font-size: 18px;
 }
 
 .status {
@@ -33,12 +37,14 @@
 .actions {
   margin-top: 12px;
   display: flex;
+  width:20px;
+  padding: 10px 10px;
   gap: 6px;
   flex-wrap: wrap;
 }
 
 .btn {
-  padding: 6px 10px;
+  padding: 6px 300px;
   font-size: 13px;
   border-radius: 8px;
   border: 1px solid #ffd0c7;
@@ -67,14 +73,18 @@
 .btn.success {
   background: #e8ffe7;
   color: #0b6a2e;
+  width:20px;
 }
 
 .btn.ghost {
   background: #f7f7f7;
   color: #444;
+  width: 200px;
+  padding: 6px 300px;
 }
 
 .btn.chat {
   background: #eef3ff;
   color: #1a3ea1;
+  width:20px;
 }

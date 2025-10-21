@@ -49,6 +49,7 @@ h2 {
 .tracking-container {
   margin-top: 1rem;
   padding: 1rem;
+  width:770px;
   background: #fff8fb;
   border-radius: 0.8rem;
   box-shadow: 0 3px 8px rgba(219, 39, 119, 0.1);
@@ -57,7 +58,7 @@ h2 {
 .tracking-steps.pipeline {
   display: flex;
   justify-content: space-between;
-  width: 70%;
+  width: 100%;
   align-items: center;
   position: relative;
   margin: 1rem 0;
@@ -65,6 +66,7 @@ h2 {
 
 .pipeline-step {
   display: flex;
+  width:90px;
   flex-direction: column;
   align-items: center;
   position: relative;
@@ -116,7 +118,8 @@ h2 {
 .btn.action-btn {
   background: #f3f3f3;
   color: #555;
-  width: 150px;
+  width: 300px;
+  padding:10px 35px 10px;
   text-align: center;
 }
 
@@ -125,12 +128,26 @@ h2 {
   color: white;
 }
 
-.btn.chat {
+.btn-chat {
+
   background: #fdf2f8;
   color: #be185d;
+  width:100%;
+  padding:10px 35px 10px;
+  text-align: center;
+  
+}
+.btn-chat.active{
+  background: #db2777;
+  color: white;
+}
+.btn-chat:hover{
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
 .btn:hover {
   transform: scale(1.05);
   opacity: 0.9;
+  
 }

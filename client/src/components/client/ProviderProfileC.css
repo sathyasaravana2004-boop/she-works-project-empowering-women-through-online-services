@@ -4,7 +4,7 @@
   max-width: 960px;
   margin: 30px auto;
   padding: 20px;
-  background: #ffffff;
+  background: #ffffffb4;
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', sans-serif;
@@ -12,6 +12,7 @@
 
 .profile-card {
   display: flex;
+  
   flex-wrap: wrap;
   gap: 20px;
   margin-bottom: 30px;
@@ -71,7 +72,7 @@
 }
 
 .write-review-btn {
-  background: #20bf6b;
+  background: #4b7bec;
 }
 
 .reviews-section {

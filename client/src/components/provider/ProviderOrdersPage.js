@@ -179,7 +179,7 @@ const ProviderOrdersPage = () => {
                       ))}
 
                       <button
-                        className="btn chat"
+                        className="btn-chat"
                         onClick={() => handleChatClick(order.id)}
                       >
                         💬 Chat with Client
